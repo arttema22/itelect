@@ -66,6 +66,7 @@ class DocTypeResource extends ModelResource
     */
     public function import(): ?ImportHandler
     {
+        //return null; // импорт не будет работать
         return ImportHandler::make('import')->translatable('doc');
     }
 
@@ -74,6 +75,7 @@ class DocTypeResource extends ModelResource
     */
     public function export(): ?ExportHandler
     {
+        //return null; // экспорт не будет работать
         return ExportHandler::make('export')->queue()->translatable('doc');
     }
 }

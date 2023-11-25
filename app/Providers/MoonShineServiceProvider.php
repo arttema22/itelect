@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Articles\Article;
+use App\MoonShine\Resources\Articles\ArticleResource;
 use App\MoonShine\Resources\Contacts\AddressResource;
 use App\MoonShine\Resources\Contacts\BankResource;
 use App\MoonShine\Resources\Contacts\CompanyResource;
@@ -37,6 +39,12 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     protected function menu(): array
     {
         return [
+            MenuGroup::make('articles', [
+                MenuItem::make('articles', new ArticleResource)->icon('heroicons.outline.clipboard-document-list')->translatable('article')
+                    ->badge(fn () => strval(Article::query()->count())),
+            ])->icon('heroicons.outline.clipboard-document-list')->translatable('article')
+                ->canSee(fn () => request()->routeIs('moonshine.*')),
+
             MenuGroup::make('docs', [
                 MenuItem::make('docs', new DocumentResource)->icon('heroicons.outline.document')->translatable('doc'),
             ])->icon('heroicons.outline.document')->translatable('doc')
@@ -74,6 +82,12 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
      */
     protected function theme(): array
     {
-        return [];
+        return [
+            'colors' => [
+                //    'primary' => '#F4A900',
+                //    'secondary' => '#A18594',
+                //    'body' => '#A18594'
+            ]
+        ];
     }
 }
