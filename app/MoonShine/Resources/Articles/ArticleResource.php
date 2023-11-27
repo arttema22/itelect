@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Articles\Article;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Fields\ID;
+use MoonShine\Fields\Slug;
 use MoonShine\Fields\Text;
+use MoonShine\Fields\TinyMce;
+use MoonShine\Fields\Image;
 
 class ArticleResource extends ModelResource
 {
@@ -21,6 +24,7 @@ class ArticleResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('title'),
+            Slug::make('Slug'),
         ];
     }
 
@@ -28,6 +32,13 @@ class ArticleResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
+            Text::make('title')->required(),
+            Slug::make('Slug')
+                ->from('title')
+                ->unique(),
+            TinyMce::make('Description'),
+            Image::make('thumbnail')
+                ->dir('articles'),
         ];
     }
 

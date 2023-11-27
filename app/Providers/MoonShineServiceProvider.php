@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\Articles\Article;
+use App\Models\Products\Product;
 use App\MoonShine\Resources\Articles\ArticleResource;
 use App\MoonShine\Resources\Contacts\AddressResource;
 use App\MoonShine\Resources\Contacts\BankResource;
@@ -14,6 +15,7 @@ use App\MoonShine\Resources\Contacts\PersonResource;
 use App\MoonShine\Resources\Documents\DocTemplateResource;
 use App\MoonShine\Resources\Documents\DocTypeResource;
 use App\MoonShine\Resources\Documents\DocumentResource;
+use App\MoonShine\Resources\ProductResource;
 use MoonShine\Menu\MenuDivider;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\Menu\MenuGroup;
@@ -45,6 +47,12 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             ])->icon('heroicons.outline.clipboard-document-list')->translatable('article')
                 ->canSee(fn () => request()->routeIs('moonshine.*')),
 
+            MenuGroup::make('products', [
+                MenuItem::make('products', new ProductResource)->icon('heroicons.outline.gift')->translatable('product')
+                    ->badge(fn () => strval(Product::query()->count())),
+            ])->icon('heroicons.outline.gift')->translatable('product')
+                ->canSee(fn () => request()->routeIs('moonshine.*')),
+
             MenuGroup::make('docs', [
                 MenuItem::make('docs', new DocumentResource)->icon('heroicons.outline.document')->translatable('doc'),
             ])->icon('heroicons.outline.document')->translatable('doc')
@@ -72,6 +80,9 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             ])->canSee(fn () => request()->routeIs('moonshine.*')),
 
             MenuItem::make('article', fn () => route('articles.index'))
+                ->canSee(fn () => !request()->routeIs('moonshine.*')),
+
+            MenuItem::make('product', fn () => route('products.index'))
                 ->canSee(fn () => !request()->routeIs('moonshine.*')),
 
         ];
