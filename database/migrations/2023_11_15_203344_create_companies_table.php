@@ -28,8 +28,8 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('set null');
 
-            $table->char('name_full')->nullable()->comment('Название полное');
-            $table->char('name_short')->nullable()->comment('Название короткое');
+            $table->char('name_full')->comment('Название полное');
+            $table->char('name_short')->comment('Название короткое');
             $table->decimal('inn', $precision = 12, $scale = 0)->nullable()->comment('ИНН');
             $table->decimal('ogrn', $precision = 13, $scale = 0)->nullable()->comment('ОГРН');
             $table->decimal('ogrnip', $precision = 15, $scale = 0)->nullable()->comment('ОГРНИП');

@@ -17,18 +17,14 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => fake()->numberBetween(1, 3),
             'title' => ucfirst($this->faker->words(2, true)),
+            'slug' => $this->faker->slug(),
+            'content' => $this->faker->text(),
+            'thumbnail' => $this->faker->url(),
             'description' => $this->faker->text(),
-            //'slug' => $this->faker->slug(),
-            //'rating' => $this->faker->numberBetween(0, 5),
-            //'link' => $this->faker->url(),
-            //'age_from' => $this->faker->numberBetween(0, 18),
-            //'age_to' => $this->faker->numberBetween(18, 60),
-            //'active' => $this->faker->boolean(),
-            //'color' => $this->faker->hexColor(),
-            //'files' => [],
-            //'data' => [],
-            //'code' => ''
+            'keywords' => ucfirst($this->faker->words(2, true)),
+            'is_publish' => $this->faker->boolean(),
         ];
     }
 }

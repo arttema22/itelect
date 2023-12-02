@@ -66,7 +66,7 @@ class ProductResource extends ModelResource
         return [
             ActionButton::make(
                 'on site',
-                fn (Product $data) => route('products.index', $data->slug)
+                fn (Product $data) => route('products.show', $data->slug)
             ),
         ];
     }
