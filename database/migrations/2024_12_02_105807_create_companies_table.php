@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
-            $table->integer('inn')->unique();
+            $table->integer('inn');
             $table->string('kpp')->nullable();
             $table->string('director');
             $table->string('accountant')->nullable();
-            $table->integer('bank_rs')->unique();
-            $table->integer('bank_bik')->unique();
-            $table->integer('bank_ks')->unique();
+            $table->integer('bank_rs');
+            $table->integer('bank_bik');
+            $table->integer('bank_ks');
             $table->string('bank_name');
             $table->timestamps();
         });

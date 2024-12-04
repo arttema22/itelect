@@ -1,10 +1,13 @@
 <?php
 
+use App\Livewire\Companies;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('companies', Companies::class);
+
 
 Route::middleware([
     'auth:sanctum',
